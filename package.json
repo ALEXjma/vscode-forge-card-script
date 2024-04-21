@@ -1,0 +1,25 @@
+{
+  "name": "forge-card-script",
+  "displayName": "Forge Card Script",
+  "description": "Forge card scripting language",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.88.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "contributes": {
+    "languages": [{
+      "id": "forge-card-script",
+      "aliases": ["Forge Card Script", "forge-card-script"],
+      "extensions": [".txt"],
+      "configuration": "./language-configuration.json"
+    }],
+    "grammars": [{
+      "language": "forge-card-script",
+      "scopeName": "source.forge-card-script",
+      "path": "./syntaxes/forge-card-script.tmLanguage.json"
+    }]
+  }
+}
