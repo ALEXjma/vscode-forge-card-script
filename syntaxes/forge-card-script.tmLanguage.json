@@ -1,32 +1,143 @@
 {
-	"$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
-	"name": "Forge Card Script",
-	"patterns": [
-		{
-			"include": "#keywords"
-		},
-		{
-			"include": "#strings"
-		}
-	],
-	"repository": {
-		"keywords": {
-			"patterns": [{
-				"name": "keyword.control.forge-card-script",
-				"match": "\\b(if|while|for|return)\\b"
-			}]
-		},
-		"strings": {
-			"name": "string.quoted.double.forge-card-script",
-			"begin": "\"",
-			"end": "\"",
-			"patterns": [
-				{
-					"name": "constant.character.escape.forge-card-script",
-					"match": "\\\\."
-				}
-			]
-		}
-	},
-	"scopeName": "source.forge-card-script"
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "Forge Card Script",
+  "patterns": [
+    {
+      "include": "#comment"
+    },
+    {
+      "include": "#keywords"
+    },
+    {
+      "include": "#separators"
+    },
+    {
+      "include": "#operators"
+    },
+    {
+      "include": "#numbers"
+    },
+    {
+      "include": "#strings"
+    }
+  ],
+  "repository": {
+    "comment": {
+      "patterns": [
+        {
+          "begin": "(^[ \\t]+)?(?=#)",
+          "beginCaptures": {
+            "1": {
+              "name": "punctuation.whitespace.comment.leading.forge-card-script"
+            }
+          },
+          "end": "(?!\\G)",
+          "patterns": [
+            {
+              "begin": "#",
+              "beginCaptures": {
+                "0": {
+                  "name": "punctuation.definition.comment.forge-card-script"
+                }
+              },
+              "end": "\\n",
+              "name": "comment.line.number-sign.forge-card-script"
+            }
+          ]
+        }
+      ]
+    },
+    "keywords": {
+      "patterns": [
+        {
+          "name": "entity.name.operator.forge-card-script",
+          "match": "\\b(ParentTargeted|TriggeredCardController|TriggerObjectsAttackers|ExileFromGraveCost|AgendaLogic|Keyword|ImprintedLKI|DeckNeeds|TargetedLKI|RememberedLKI|DiscardCost|SacCost|Remembered|PlayerCountPlayers|Number|PlayerCountOpponents|Event|Sacrificed|DB|ReplaceCount|Type|PlayerCountYourTeam|TriggeredCard|TriggerCount|Ability|Color|SVar|Targeted|PlayerCountNonActive|Name|SP|Mode|AB|AI|AlternateMode|DeckHas|EnchantMe|SVar|A|S|Oracle|L|K|Types|ManaCost|Name|PT|Text|Loyalty|Colors|DeckHints|HandLifeModifier|T|TargetedPlayer|PlayerCountRemembered|Count)\\b"
+        },
+        {
+          "name": "entity.name.function.forge-card-script",
+          "match": "\\b(CreateToken|ChangesZoneAll|CantAttack|CounterAddedOnce|Investigated|DamageResolve|AttackerUnblocked|CantAttackUnless|Destroyed|Countered|CounterAdded|Clashed|Blocks|Cycled|DamageDoneOnce|AbilityCast|Drawn|AttackerBlockedByCreature|CantBlockBy|BecomesTarget|Taps|DamageDealtOnce|Assemble|Cranked|Transformed|Moved|GameLoss|SpellCast|RevealYouChoose|TapsForMana|Abandon|ActivateAbility|AddOrRemoveCounter|AddPhase|AddTurn|Animate|AnimateAll|Attach|Balance|BecomeMonarch|Sac|SubCounter|BecomeMonstrous|Untaps|LifeGained|Always|PlanarDice|AddCounter|Return|PayEnergy|ChangesZone|BecomesBlocked|BidLife|Bond|Discarded|Branch|DamageDone|Attacks|ChangeCombatants|PlaneswalkedTo|Continuous|TurnFaceUp|Phase|ChangeTargets|ChangeText|ChangeZone|ChangeZoneAll|Charm|ChooseCard|ChooseColor|ChooseDirection|ChooseNumber|ChoosePlayer|ChooseSource|ChooseType|Clash|Cleanup|Clone|CopyPermanent|CopySpellAbility|ControlSpell|ControlPlayer|Counter|DamageAll|DealDamage|Debuff|DeclareCombatants|DelayedTrigger|Destroy|DestroyAll|Dig|DigUntil|Discard|DrainMana|Draw|EachDamage|Effect|Encode|EndTurn|ExchangeLife|ExchangeControl|ExchangeControlVariant|ExchangePower|ExchangeZone|Explore|Fight|FlipACoin|Fog|GainControl|GainLife|GainOwnership|GameDrawn|GenericChoice|Goad|Haunt|LookAt|LoseLife|LosesGame|Mana|ManaReflected|Manifest|Meld|Mill|MoveCounter|MultiplePiles|MultiplyCounter|MustAttack|MustBlock|NameCard|NoteCounters|PeekAndReveal|PermanentCreature|PermanentNoncreature|Phases|Planeswalk|Play|PlayLandVariant|Poison|PreventDamage|PreventDamageAll|Proliferate|Protection|ProtectionAll|Pump|PumpAll|PutCounter|PutCounterAll|RearrangeTopOfLibrary|Regenerate|RegenerateAll|RemoveCounter|RemoveCounterAll|RemoveFromCombat|ReorderZone|Repeat|RepeatEach|ReplaceEffect|ReplaceSplitDamage|RestartGame|Reveal|RevealHand|ReverseTurnOrder|RollPlanarDice|RunSVarAbility|Sacrifice|SacrificeAll|Scry|SetInMotion|SetLife|SetState|Shuffle|SkipTurn|StoreSVar|StoreMap|Tap|TapAll|TapOrUntap|TapOrUntapAll|Token|TwoPiles|Unattach|UnattachAll|Untap|UntapAll|Vote|WinsGame|InternalEtbReplacement|InternalLegendaryRule|InternalIgnoreEffect|Loselife)\\s"
+        },
+        {
+          "name": "keyword.type.forge-card-script",
+          "match": "(Windgrace|Phyrexia|Lorwyn|Dominaria|Valla|Ravnica|Revelers|Reveler|Rowan|Jaya|Will|Azra|Yanling|Yanggu|Saga|Sagas|Teddies|Ships|Scientist|Scientists|Expansion-Symbols|Raccoon|Raccoons|Wrestlers|Heads|Lobster|Lobsters|Designer|Designers|Elemental?|Elementals?|Paratrooper|Paratroopers|Vampyre|Vampyres|Kangaroos|Waiters|Ladies-of-Proper-Etiquette|Brainiacs|Children|Cows|Guses|Mimes|Hatificers|Bureaucrats|Heroes|Beavers|Penguin|Penguins|Killbots|Eggs|Chickens|Treasures|Clues|Curses|Shrines|Fortifications|Contraptions|Auras|Spies|The-Biggest|-Baddest|-Nastiest|-Scariest-Creature-You'll-Ever-See|-Scariest-Creatures-You'll-Ever-See|Mummies|Pig|Pigs|Igspay|Gamers|Cyborgs|Donkeys|Lairs|Power-Plants|Towers|Mines|Villains|Cartouches|Vehicles|Mummy|Teddy|Ship|Expansion-Symbol|Wrestler|Head|Eaturecray|Igpay|Deer|Beaver|Killbot|Hatificer|Spy|Gus|Brainiac|Cyborg|Villain|Host|Kangaroo|WaiterLady-of-Proper-Etiquette|Artifact|Conspiracy|Creature|Emblem|Egg|Chicken|Clamfolk|Gamer|Townsfolk|Child|Cow|Enchantment|Instant|Land|Phenomenon|Plane|Planeswalker|Mime|Bureaucrat|Hero|Scheme|Sorcery|Tribal|Vanguard|Basic|Elite|Legendary|Snow|Ongoing|World|Donkey|Pig|AllCreatureTypes|Elemental|Spirit|Germ|Servo|Plains|Island|Islands|Swamp|Swamps|Mountain|Mountains|Forest|Forests|Desert|Deserts|Gate|Gates|Lair|Locus|Mine|Power-Plant|Tower|Urza's|Advisor|Advisors|Aetherborn|Ally|Allies|Angel|Angels|Antelope|Antelopes|Ape|Apes|Archer|Archers|Archon|Archons|Artificer|Artificers|Assassin|Assassins|Assembly-Worker|Assembly-Workers|Atog|Atogs|Aurochs|Avatar|Avatars|Badger|Badgers|Barbarian|Barbarians|Basilisk|Basilisks|Bat|Bats|Bear|Bears|Beast|Beasts|Beeble|Beebles|Berserker|Berserkers|Bird|Birds|Blinkmoth|Blinkmoths|Boar|Boars|Bringer|Bringers|Brushwagg|Brushwaggs|Camarid|Camarids|Camel|Camels|Caribou|Caribous|Carrier|Carriers|Cat|Cats|Centaur|Centaurs|Cephalid|Cephalids|Chimera|Chimeras|Citizen|Citizens|Cleric|Clerics|Cockatrice|Cockatrices|Construct|Constructs|Coward|Cowards|Crab|Crabs|Crocodile|Crocodiles|Cyclops|Cyclopes|Dauthi|Dauthis|Demon|Demons|Deserter|Deserters|Devil|Devils|Dinosaur|Dinosaurs|Djinn|Djinns|Dragon|Dragons|Drake|Drakes|Dreadnought|Dreadnoughts|Drone|Drones|Druid|Druids|Dryad|Dryads|Dwarf|Dwarves|Efreet|Efreets|Elder|Elders|Eldrazi|Elementals|Elephant|Elephants|Elf|Elves|Elk|Elks|Eye|Eyes|Faerie|Faeries|Ferret|Ferrets|Fish|Flagbearer|Flagbearers|Fox|Foxes|Frog|Frogs|Fungus|Fungi|Gargoyle|Gargoyles|Germs|Giant|Giants|Gnome|Gnomes|Goat|Goats|Goblin|Goblins|God|Gods|Golem|Golems|Gorgon|Gorgons|Graveborn|Gremlin|Gremlins|Griffin|Griffins|Hag|Hags|Harpy|Harpies|Hellion|Hellions|Hippo|Hippos|Hippogriff|Hippogriffs|Homarid|Homarids|Homunculus|Homunculi|Horror|Horrors|Horse|Horses|Hound|Hounds|Human|Humans|Hydra|Hydras|Hyena|Hyenas|Illusion|Illusions|Imp|Imps|Incarnation|Incarnations|Insect|Insects|Jackal|Jackals|Jellyfish|Jellyfishes|Juggernaut|Juggernauts|Kavu|Kirin|Kirins|Kithkin|Kithkins|Knight|Knights|Kobold|Kobolds|Kor|Kors|Kraken|Krakens|Lamia|Lamias|Lammasu|Lammasus|Leech|Leeches|Leviathan|Leviathans|Lhurgoyf|Lhurgoyfs|Licid|Licids|Lizard|Lizards|Manticore|Manticores|Masticore|Masticores|Mercenary|Mercenaries|Merfolk|Merfolks|Metathran|Metathrans|Minion|Minions|Minotaur|Minotaurs|Mole|Moles|Monger|Mongers|Mongoose|Mongooses|Monk|Monks|Monkey|Monkeys|Moonfolk|Moonfolks|Mutant|Mutants|Myr|Myrs|Mystic|Mystics|Naga|Nagas|Nautilus|Nautili|Nephilim|Nephilims|Nightmare|Nightmares|Nightstalker|Nightstalkers|Ninja|Ninjas|Noggle|Noggles|Nomad|Nomads|Nymph|Nymphs|Octopus|Octopi|Ogre|Ogres|Ooze|Oozes|Orb|Orbs|Orc|Orcs|Orgg|Orggs|Ouphe|Ouphes|Ox|Oxen|Oyster|Oysters|Pegasus|Pegasi|Pentavite|Pentavites|Pest|Pests|Phelddagrif|Phelddagrifs|Phoenix|Phoenixes|Pilot|Pilots|Pincher|Pinchers|Pirate|Pirates|Plant|Plants|Praetor|Praetors|Prism|Prisms|Processor|Processors|Rabbit|Rabbits|Rat|Rats|Rebel|Rebels|Reflection|Reflections|Rhino|Rhinos|Rigger|Riggers|Rogue|Rogues|Sable|Sables|Salamander|Salamanders|Samurai|Samurais|Sand|Sands|Saproling|Saprolings|Satyr|Satyrs|Scarecrow|Scarecrows|Scion|Scions|Scorpion|Scorpions|Scout|Scouts|Serf|Serfs|Serpent|Serpents|Servos|Shade|Shades|Shaman|Shamans|Shapeshifter|Shapeshifters|Sheep|Siren|Sirens|Skeleton|Skeletons|Slith|Sliths|Sliver|Slivers|Slug|Slugs|Snake|Snakes|Soldier|Soldiers|Soltari|Soltaris|Spawn|Spawns|Specter|Specters|Spellshaper|Spellshapers|Sphinx|Sphinxes|Spider|Spiders|Spike|Spikes|Spirits|Splinter|Splinters|Sponge|Sponges|Squid|Squids|Squirrel|Squirrels|Starfish|Surrakar|Surrakars|Survivor|Survivors|Tetravite|Tetravites|Thalakos|Thalakoses|Thopter|Thopters|Thrull|Thrulls|Treefolk|Treefolks|Trilobite|Trilobites|Triskelavite|Triskelavites|Troll|Trolls|Turtle|Turtles|Unicorn|Unicorns|Vampire|Vampires|Vedalken|Vedalkens|Viashino|Viashinos|Volver|Volvers|Wall|Walls|Warrior|Warriors|Weird|Weirds|Werewolf|Werewolves|Whale|Whales|Wizard|Wizards|Wolf|Wolves|Wolverine|Wolverines|Wombat|Wombats|Worm|Worms|Wraith|Wraiths|Wurm|Wurms|Yeti|Yetis|Zombie|Zombies|Zubera|Zuberas|Arcane|Trap|Aura|Cartouche|Curse|Shrine|Clue|Contraption|Equipment|Fortification|Treasure|Vehicle|Ajani|Arlinn|Ashiok|Bolas|Chandra|Dack|Daretti|Domri|Dovin|Elspeth|Angrath|Huatli|Freyalise|Garruk|Gideon|Jace|Karn|Kaya|Kiora|Koth|Liliana|Nahiri|Narset|Nissa|Nixilis|Ral|Saheeli|Samut|Sarkhan|Sorin|Tamiyo|Teferi|Tezzeret|Tibalt|Ugin|Urza|Venser|Vraska|Xenagos)\\s"
+        },
+        {
+          "name": "keyword.forge-card-script",
+          "match": "(NotRemembered|OpponentsAttackedThisTurn|TokenScript|nonAura|TotalCommanderCastFromCommandZone|inZoneGraveyard|LifeYourTeamGainedThisTurn|Blessing|Exert|TriggeredAttackingPlayerAndYou|ExistingCounter|isMonarch|LastStateGraveyard|SacrificedThisTurn|Delirium|nonEldrazi|Investigate|Ingest|YourCountersExperience|nonSpider|ExiledMoveToGrave|nonLegendary|ControlledByPlayerInTheDirection|Left|Morbid|withDefender|MonstrosityAmount|DevotionDual|FirstSpellTotalManaSpent|CostCountersRemoved|TriggeredAttackingPlayer|artifacts|creatures|Combo|LifeYouGainedThisTurn|wasCastFromHand|Once|ControlledBy|FatefulHour|wasCastFromGraveyard|nonSpirit|LifeGain|ReplacedTarget|GreatestPower|HighestLifeTotal|TotalOppPoisonCounters|TypeInAllYards|TriggeredSpellAbilityController|TriggeredDefender|AttackingPlayerConservative|Compare|TypeInYourSideboard|TriggeredTarget|inRealZoneGraveyard|TriggeredAttackerController|LifeYouLostThisTurn|DamagedByEquipped|SumPower|nonOoze|nonZombie|canProduceMana|Chroma|sharesCreatureTypeWith|NeverCastIfLifeBelow|ALL|TotalOppDamageThisTurn|prowled|LowestLifeTotal|XCantBe0|TriggeredAttacker|TriggeredBlockers|CastSACMC|Sideboard|RememberedNumber|nonCreature|Declare Blockers|YourLifeTotal|power|ValidExile|InYourLibrary|NumCardsInYourHand|ALWAYS|TriggeredSourceController|ValidHand|sharesNameWith|DamageAmount|TriggeredTargetController|Threshold|FilterControlledByRemembered|TriggeredActivator|CARDNAME's|TypeInYourYard|PayLife|HighestValid|TriggeredPlayer|withMoreCreaturesThanYou|IsCounterUser|Pactivator|Random|MaxForAnyController|ChosenNumber|Main2|SpellCopy|TriggeredSpellAbility|MaxCMC|inZoneBattlefield|TriggeredBlocker|PLAYER|Triggered|Transform|NeedsPrevention|ChoiceBurn|AlwaysAtOppEOT|Good|red|black|green|white|blue|TotalDamageDoneByThisTurn|TimesKicked|Domain|WorstCard|TypeYouCtrl|OppsAtLifeTotal|LifeTotal|OppAtTenLife|EnchantedBy|CardManaCost|AllRemembered|Historic|TargetedOrController|EFFECTSOURCE|InChosenHand|InOppHand|Multiple|Metalcraft|CardToughness|Activated|UntilYourNextTurn|ExileAndPlayUntilEOT|RedirectSpellDamageFromPlayer|RememberedCard|Devotion|Never|PreventedDamage|no cost|Self|ShieldEffectTarget|OriginalHost|End Of Turn|InYourSideboard|EffectSource|NamedCard|Equipped|Enchanted|TopOfLibrary|ABILITY|Number|None|TriggeredCard|XChoice|YouDrewThisTurn|ChosenX|ExiledWithSource|CountSVar|NumTypeYouCtrl|Counters|AttackersDeclared|TgtChoose|EOT|cmc|LifeLostThisTurn|CardsInHand|InAllYards|CardPower|HIDDEN|BottomOfLibrary|nonArtifact|Targeted|ValidGraveyard|toughness|CardsInGraveyard|ThisTargetedCard|ParentTarget|Remembered|DirectRemembered|DelayTriggerRemembered|FirstRemembered|Clones|Imprinted|ChosenCard|SacrificedCards|Sacrificed|DiscardedCards|ExiledCards|Exiled|TappedCards|Tapped|UntappedCards|Untapped|Parent|SourceFirstSpell|TargetedPlayer|TargetedController|TargetedOwner|TargetedAndYou|ParentTargetedController|RememberedOpponents|RememberedController|RememberedOwner|ImprintedController|ImprintedOwner|EnchantedController|EnchantedOwner|EnchantedPlayer|AttackingPlayer|DefendingPlayer|ChosenPlayer|ChosenAndYou|SourceController|CardOwner|ActivePlayer|You|Opponent|Spell|Permanent|Card|sameName|namedCard|NamedByRememberedPlayer|White|Blue|Black|Red|Green|nonChosenCard|nonWhite|nonBlue|nonBlack|nonRed|nonGreen|Colorless|nonColorless|Multicolor|nonMulticolor|Monocolor|nonMonocolor|ChosenColor|AllChosenColors|AnyChosenColor|DoubleFaced|Flip|YouCtrl|YouDontCtrl|OppCtrl|ChosenCtrl|DefenderCtrl|DefenderCtrlForRemembered|DefendingPlayerCtrl|EnchantedPlayerCtrl|EnchantedControllerCtrl|RememberedPlayer|RememberedPlayerCtrl|nonRememberedPlayerCtrl|TargetedPlayerCtrl|TargetedControllerCtrl|ActivePlayerCtrl|YouOwn|YouDontOwn|OppOwn|NonActivePlayerCtrl|TargetedPlayerOwn|OwnerDoesntControl|Other|AttachedBy|Attached|NameNotEnchantingEnchantedPlayer|NotAttachedTo|CanEnchantRemembered|CanEnchantSource|CanBeEnchantedBy|CanBeEnchantedByTargeted|CanBeEnchantedByAllRemembered|EquippedBy|EquippedByTargeted|EquippedByEnchanted|FortifiedBy|CanBeEquippedBy|Fortified|HauntedBy|notTributed|madness|Paired|NotPaired|PairedWith|Above|DirectlyAbove|TopGraveyardCreature|BottomGraveyard|TopLibrary|Cloned|DamagedBy|Damaged|IsTargetingSource|sharesPermanentTypeWith|canProduceSameManaTypeWith|SecondSpellCastThisTurn|ThisTurnCast|withFlashback|tapped|untapped|faceDown|faceUp|hasLevelUp|DrawnThisTurn|enteredBattlefieldThisTurn|notEnteredBattlefieldThisTurn|firstTurnControlled|notFirstTurnControlled|startedTheTurnUntapped|attackedOrBlockedSinceYourLastUpkeep|blockedOrBeenBlockedSinceYourLastUpkeep|dealtDamageToYouThisTurn|dealtDamageToOppThisTurn|controllerWasDealtCombatDamageByThisTurn|controllerWasDealtDamageByThisTurn|wasDealtDamageThisTurn|wasDealtDamageByHostThisTurn|wasDealtDamageByEquipeeThisTurn|wasDealtDamageByEnchantedThisTurn|dealtDamageThisTurn|attackedThisTurn|attackedLastTurn|blockedThisTurn|gotBlockedThisTurn|notAttackedThisTurn|notAttackedLastTurn|notBlockedThisTurn|greatestPower|yardGreatestPower|leastPower|leastToughness|greatestCMC|greatestRememberedCMC|lowestRememberedCMC|lowestCMC|enchanted|unenchanted|enchanting|equipped|unequipped|equipping|token|nonToken|hasXCost|suspended|delved|attacking|attackingYou|notattacking|attackedBySourceThisCombat|blocking|blockingSource|blockingCreatureYouCtrl|blockingRemembered|sharesBlockingAssignmentWith|notblocking|blocked|blockedBySource|blockedByThisTurn|blockedBySourceThisTurn|blockedSource|isBlockedByRemembered|blockedRemembered|blockedByRemembered|unblocked|attackersBandedWith|kicked|kicked1|kicked2|notkicked|evoked|HasDevoured|HasNotDevoured|IsMonstrous|IsNotMonstrous|CostsPhyrexianMana|IsRemembered|IsNotRemembered|IsImprinted|IsNotImprinted|hasActivatedAbilityWithTapCost|hasActivatedAbility|hasManaAbility|hasNonManaActivatedAbility|NoAbilities|HasCounters|wasNotCast|ChosenType|IsNotChosenType|IsCommander|IsRenowned|BeginCombat|HighestLifeGainedThisTurn|ReplacedCard|YourTeamCtrl|IsNotRenowned|TurnFace|manifested|Battlefield|Any|Exile|Graveyard|All|Library|Hand|WhenNotPaid|StormCount|TriggeredDefendingPlayer|CurrentStormCount|ReduceCost|RaiseCost|CipherTrigger|Chaos|Kicked|WasKicked|EncodedWithSource|Valid|Player|CARDNAME|tapXType|CanBeSacrificedBy|SpellDescription|ExileFromGrave|LastStateBattlefield|TriggeredCardController|counters|TriggeredSource|withModular|MostProminentInComputerDeck|Chosen|withFlying|ScavengeX|xPaid|unblocked attacker|maxLevel|Upkeep|ThisTurnEntered|from|CantBeCast|End of Turn|ConvertedManaCost|Secondary|etbCounter|no Condition|Stack|Converge|DiscardMadness|Defined|Split|leftcmc|rightcmc|nonLand|NotSplit|withoutFlying|RememberedSize|CounterRemoved|AttackerBlocked|OpponentsOtherThanDefendingPlayer|EndCombat|CardCounters|Command|Revealed|LowestValid|Drawn|Amount|StrictlySelf|TriggeredCardLKICopy|AttackerBlockedByCreature|cameUnderControlSinceLastUpkeep|no Condition|Blank|no desc|ChangesController|MultiColor|MonoColor|Source|MorphUp|ValidCommand|Effect)(?=\\s|\\.|\\+)"
+        },
+        {
+          "name": "support.type.property-name.forge-card-script",
+          "match": "(?<=\\|\\s)([^:$|]+)(?=\\$)"
+        },
+        {
+          "name": "entity.name.type.forge-card-script",
+          "match": "((?<=:)([^:]+)(?=:))|((?<=(Triggers\\$\\s|SVars?\\$\\s|Execute\\$\\s|SubAbility\\$\\s)[A-Za-z,]*,?)([^:$|,]+))"
+        },
+        {
+          "name": "constant.language.boolean.true.forge-card-script",
+          "match": "\\bTrue\\b"
+        },
+        {
+          "name": "constant.language.boolean.false.forge-card-script.forge-card-script",
+          "match": "\\bFalse\\b"
+        }
+      ]
+    },
+    "separators": {
+      "patterns": [
+        {
+          "name": "keyword.separator.forge-card-script",
+          "match": "[:$|]"
+        },
+        {
+          "name": "punctuation.accessor.forge-card-script",
+          "match": "(?<=[A-Za-z0-9])[.+](?=[A-Za-z0-9])"
+        },
+        {
+          "name": "punctuation.separator.comma.forge-card-script",
+          "match": "(?<=[A-Za-z0-9]),(?=[A-Za-z0-9])"
+        }
+      ]
+    },
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.forge-card-script",
+          "match": "\\s(LE|LT|EQ|NE|GE|GT)"
+        }
+      ]
+    },
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.character.forge-card-script",
+          "match": "[WUBRG]\\s"
+        },
+        {
+          "name": "constant.numeric.forge-card-script",
+          "match": "\\d+\\s"
+        }
+      ]
+    },
+    "strings": {
+      "patterns": [
+        {
+          "name": "string.value.forge-card-script",
+          "match": "(?<=Name(\\$\\s|:)|Oracle:|Description\\$\\s|Title\\$\\s|Prompt\\$\\s)([^:$|]+)"
+        },
+        {
+          "name": "string.quoted.double.forge-card-script",
+          "begin": "\"",
+          "end": "\"",
+          "patterns": [
+            {
+              "name": "constant.character.escape.forge-card-script",
+              "match": "\\\\."
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "scopeName": "source.forge-card-script"
 }
