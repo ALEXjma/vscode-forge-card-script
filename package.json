@@ -14,6 +14,7 @@
     "Programming Languages"
   ],
   "publisher": "ALEXjma",
+  "icon": "logo.png",
   "contributes": {
     "languages": [
       {
