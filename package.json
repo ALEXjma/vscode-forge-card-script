@@ -3,12 +3,17 @@
   "displayName": "Forge Card Scripting Language",
   "description": "Forge card scripting language support",
   "version": "0.0.1",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ALEXjma/vscode-forge-card-script.git"
+  },
   "engines": {
     "vscode": "^1.88.0"
   },
   "categories": [
     "Programming Languages"
   ],
+  "publisher": "ALEXjma",
   "contributes": {
     "languages": [
       {
