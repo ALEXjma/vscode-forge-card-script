@@ -71,7 +71,7 @@
         },
         {
           "name": "entity.name.type.forge-card-script",
-          "match": "((?<=:)([^:]+)(?=:))|((?<=(Triggers\\$\\s|SVars?\\$\\s|Execute\\$\\s|SubAbility\\$\\s)[A-Za-z,]*,?)([^:$|,]+))"
+          "match": "((?<=SVar:)([^:]+)(?=:))|((?<=(Triggers\\$\\s|SVars?\\$\\s|Execute\\$\\s|SubAbility\\$\\s)[A-Za-z,]*,?)([^:$|,]+))"
         },
         {
           "name": "constant.language.boolean.true.forge-card-script",
@@ -123,7 +123,7 @@
       "patterns": [
         {
           "name": "string.value.forge-card-script",
-          "match": "(?<=Name(\\$\\s|:)|Oracle:|Description\\$\\s|Title\\$\\s|Prompt\\$\\s)([^:$|]+)"
+          "match": "(?<=Name(\\$\\s|:)|Oracle:|Description\\$\\s|Title\\$\\s|Prompt\\$\\s)([^$|]+)"
         },
         {
           "name": "string.quoted.double.forge-card-script",
